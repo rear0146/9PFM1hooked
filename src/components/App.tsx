@@ -6,6 +6,11 @@ import Search from "./Search";
 
 const MOVIE_API_URL = "https://www.omdbapi.com/?s=man&apikey=4a3b711b"; // you should replace this with yours
 
+export interface MovieInfo {
+  Poster: string,
+  Title: string,
+  Year: number
+}
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -44,7 +49,17 @@ const App = () => {
       <Header text="HOOKED" />
       <Search search={search} />
       <p className="App-intro">Sharing a few of our favourite movies</p>
-
+      <div className="movies">
+        {loading && !errorMessage ? (
+         <span>loading...</span>
+         ) : errorMessage ? (
+          <div className="errorMessage">{errorMessage}</div>
+        ) : (
+          movies.map((movie:MovieInfo, index: number) => (
+            <Movie key={`${index}-${movie.Title}`} movie={movie} />
+          ))
+        )}
+      </div>
     </div>
   );
 };
