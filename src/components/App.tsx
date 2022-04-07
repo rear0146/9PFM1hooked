@@ -4,7 +4,8 @@ import Header from "./Header";
 import Movie from "./Movie";
 import Search from "./Search";
 
-const MOVIE_API_URL = "https://www.omdbapi.com/?s=man&apikey=4a3b711b"; // you should replace this with yours
+const API_KEY = process.env.REACT_APP_API_KEY
+const MOVIE_API_URL = `https://www.omdbapi.com/?s=man&apikey=${API_KEY}`; 
 
 export interface MovieInfo {
   Poster: string,
@@ -30,7 +31,7 @@ const App = () => {
     setLoading(true);
     setErrorMessage(null);
 
-    fetch(`https://www.omdbapi.com/?s=${searchValue}&apikey=4a3b711b`)
+    fetch(`https://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`)
       .then(response => response.json())
       .then(jsonResponse => {
         if (jsonResponse.Response === "True") {
