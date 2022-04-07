@@ -9,7 +9,11 @@ type MovieInfo = {
     Year: number
 }
 
-const Movie = (movie: MovieInfo) => {
+interface MovieProps {
+    movie: MovieInfo
+}
+
+const Movie : React.FC<MovieProps> = ({movie}) => {
   const poster =
     movie.Poster === "N/A" ? DEFAULT_PLACEHOLDER_IMAGE : movie.Poster;
   return (
